@@ -43,7 +43,7 @@ def job_worker(cmd):
 
     with thread_lock:
         num_jobs_finished.value+=1
-        sys.stdout.write('> Progress         : ' + str(num_jobs_finished.value) + '\r')
+        sys.stdout.write('\r> Progress         : ' + str(num_jobs_finished.value))
         sys.stdout.flush()
 
 
@@ -100,6 +100,8 @@ if __name__ == '__main__':
     pool = Pool(processes=num_threads, initializer=pool_initializer, initargs=(thread_lock, num_jobs_finished))
 
     sys.stdout.write('Ok\n')
+    sys.stdout.write('> Progress         : ' + str(num_jobs_finished.value))
+    sys.stdout.flush()
 
     time_start = time.time()
 
